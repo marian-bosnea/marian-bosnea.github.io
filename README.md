@@ -1,16 +1,49 @@
-# React + Vite
+# Marian Bosnea - Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beautiful presentation page showcasing mobile app development projects, built with React and Vite.
 
-Currently, two official plugins are available:
+## 🚀 Featured Projects
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Student Marketplace** - A platform connecting students for buying, selling, and exchanging goods
+- **Truckers Companion** - An AI-powered app for truck drivers' safety and efficiency
 
-## React Compiler
+## 🛠️ Technologies
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite
+- CSS3 with animations
+- GitHub Pages
 
-## Expanding the ESLint configuration
+## 📦 Development
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## 🌐 Deployment to GitHub Pages
+
+This site is configured for automatic deployment to GitHub Pages:
+
+1. Push changes to the `main` branch
+2. GitHub Actions will automatically build and deploy
+3. Visit your site at `https://marian-bosnea.github.io`
+
+### Manual Setup Steps
+
+1. Go to your repository Settings → Pages
+2. Set Source to "GitHub Actions"
+3. The workflow will automatically deploy on push
+
+## 📝 License
+
+© 2026 Marian Bosnea. All rights reserved.
