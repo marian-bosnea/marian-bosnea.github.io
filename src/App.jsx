@@ -2,7 +2,35 @@ import './App.css'
 
 function App() {
   const projects = [
-
+    {
+      id: 'irona',
+      title: 'Irona',
+      description: 'A comprehensive fitness tracker app for iPhone and Apple Watch, providing real-time health monitoring and workout tracking. Built with Swift for native iOS and watchOS experience.',
+      tags: ['Swift', 'iOS', 'watchOS', 'Health & Fitness'],
+      theme: 'light',
+      platforms: [
+        {
+          name: 'iPhone',
+          mockups: [
+            { src: '/irona/iPhone/ios_1.png', alt: 'iPhone Home Screen' },
+            { src: '/irona/iPhone/ios_2.png', alt: 'iPhone Workout Tracking' },
+            { src: '/irona/iPhone/ios_3.png', alt: 'iPhone Activity Stats' },
+            { src: '/irona/iPhone/ios_4.png', alt: 'iPhone Progress View' },
+            { src: '/irona/iPhone/ios_5.png', alt: 'iPhone Settings' },
+          ]
+        },
+        {
+          name: 'Apple Watch',
+          mockups: [
+            { src: '/irona/AppleWatch/watchos_1.png', alt: 'Apple Watch Dashboard' },
+            { src: '/irona/AppleWatch/watchos_2.png', alt: 'Apple Watch Activity Rings' },
+            { src: '/irona/AppleWatch/watchos_3.png', alt: 'Apple Watch Workout' },
+            { src: '/irona/AppleWatch/watchos_4.png', alt: 'Apple Watch Stats' },
+            { src: '/irona/AppleWatch/watchos_5.png', alt: 'Apple Watch Notifications' },
+          ]
+        }
+      ]
+    },
     {
       id: 'truckers-companion',
       title: 'Truckers Companion',
@@ -10,17 +38,11 @@ function App() {
       tags: ['Flutter', 'Prototype', 'Logistics'],
       theme: 'dark',
       mockups: [
-        { src: '/truckers-companion/home_screen_outside_workday-portrait.png', alt: 'Home Screen Outside Workday' },
         { src: '/truckers-companion/home_screen_during_workday-portrait.png', alt: 'Home Screen During Workday' },
         { src: '/truckers-companion/routing-portrait.png', alt: 'Routing' },
         { src: '/truckers-companion/ai_assistant-portrait.png', alt: 'AI Assistant' },
         { src: '/truckers-companion/driver_wellbeing-portrait.png', alt: 'Driver Wellbeing' },
-        { src: '/truckers-companion/safety-portrait.png', alt: 'Safety' },
         { src: '/truckers-companion/statistics-portrait.png', alt: 'Statistics' },
-        { src: '/truckers-companion/reports-portrait.png', alt: 'Reports' },
-        { src: '/truckers-companion/documents-portrait.png', alt: 'Documents' },
-        { src: '/truckers-companion/tools-portrait.png', alt: 'Tools' },
-        { src: '/truckers-companion/settings-portrait.png', alt: 'Settings' },
       ]
     },
     {
@@ -78,24 +100,52 @@ function App() {
                 </div>
               </div>
 
-              <div className="mockups-grid">
-                {project.mockups.map((mockup, index) => (
-                  <div
-                    key={index}
-                    className="mockup-wrapper"
-                    style={{
-                      animationDelay: `${index * 0.1}s`
-                    }}
-                  >
-                    <img
-                      src={mockup.src}
-                      alt={mockup.alt}
-                      className="mockup-image"
-                      loading="lazy"
-                    />
+              {project.platforms ? (
+                // Multi-platform project
+                project.platforms.map((platform, platformIndex) => (
+                  <div key={platformIndex} className="platform-section">
+                    <h3 className="platform-title">{platform.name}</h3>
+                    <div className="mockups-grid">
+                      {platform.mockups.map((mockup, index) => (
+                        <div
+                          key={index}
+                          className="mockup-wrapper"
+                          style={{
+                            animationDelay: `${index * 0.1}s`
+                          }}
+                        >
+                          <img
+                            src={mockup.src}
+                            alt={mockup.alt}
+                            className="mockup-image"
+                            loading="lazy"
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                ))}
-              </div>
+                ))
+              ) : (
+                // Single platform project
+                <div className="mockups-grid">
+                  {project.mockups.map((mockup, index) => (
+                    <div
+                      key={index}
+                      className="mockup-wrapper"
+                      style={{
+                        animationDelay: `${index * 0.1}s`
+                      }}
+                    >
+                      <img
+                        src={mockup.src}
+                        alt={mockup.alt}
+                        className="mockup-image"
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </section>
