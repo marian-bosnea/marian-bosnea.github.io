@@ -1,6 +1,36 @@
+import { useEffect, useRef } from 'react'
 import './App.css'
 
 function App() {
+  const observerRef = useRef(null)
+
+  useEffect(() => {
+    // Create intersection observer for scroll animations
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    )
+
+    // Observe all elements with scroll-animate class
+    const elements = document.querySelectorAll('.scroll-animate')
+    elements.forEach((el) => observerRef.current.observe(el))
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect()
+      }
+    }
+  }, [])
+
   const projects = [
     {
       id: 'irona',
@@ -89,11 +119,15 @@ function App() {
           <div className="container">
             <div className="project-card">
               <div className="project-intro">
-                <h2 className="project-title">{project.title}</h2>
-                <p className="project-description">{project.description}</p>
-                <div className="project-tags">
+                <h2 className="project-title scroll-animate">{project.title}</h2>
+                <p className="project-description scroll-animate">{project.description}</p>
+                <div className="project-tags scroll-animate">
                   {project.tags.map((tag, index) => (
-                    <span key={index} className="tag">
+                    <span
+                      key={index}
+                      className="tag"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
                       {tag}
                     </span>
                   ))}
@@ -104,14 +138,14 @@ function App() {
                 // Multi-platform project
                 project.platforms.map((platform, platformIndex) => (
                   <div key={platformIndex} className="platform-section">
-                    <h3 className="platform-title">{platform.name}</h3>
-                    <div className="mockups-grid">
+                    <h3 className="platform-title scroll-animate">{platform.name}</h3>
+                    <div className="mockups-grid scroll-animate">
                       {platform.mockups.map((mockup, index) => (
                         <div
                           key={index}
                           className="mockup-wrapper"
                           style={{
-                            animationDelay: `${index * 0.1}s`
+                            animationDelay: `${index * 0.08}s`
                           }}
                         >
                           <img
@@ -127,13 +161,13 @@ function App() {
                 ))
               ) : (
                 // Single platform project
-                <div className="mockups-grid">
+                <div className="mockups-grid scroll-animate">
                   {project.mockups.map((mockup, index) => (
                     <div
                       key={index}
                       className="mockup-wrapper"
                       style={{
-                        animationDelay: `${index * 0.1}s`
+                        animationDelay: `${index * 0.08}s`
                       }}
                     >
                       <img

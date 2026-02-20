@@ -226,6 +226,9 @@
 
 .mockup-wrapper {
   opacity: 0;
+}
+/* When inside a visible grid, animate with stagger */
+.mockups-grid.visible .mockup-wrapper {
   animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -301,6 +304,112 @@
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInBlur {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* Scroll Animation System */
+.scroll-animate {
+  opacity: 0;
+  transition: none;
+}
+
+/* Project Title Animation */
+.project-title.scroll-animate {
+  transform: translateY(50px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-title.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Project Description Animation */
+.project-description.scroll-animate {
+  transform: translateY(30px);
+  filter: blur(5px);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+
+.project-description.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Project Tags Animation */
+.project-tags.scroll-animate {
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+}
+
+.project-tags.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-tags.visible .tag {
+  animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+/* Platform Title Animation */
+.platform-title.scroll-animate {
+  transform: translateY(30px);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.platform-title.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mockups Grid Animation */
+.mockups-grid.scroll-animate {
+  transform: translateY(40px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+
+.mockups-grid.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Responsive Design */
@@ -436,6 +545,30 @@
 @media (prefers-reduced-motion: no-preference) {
   .mockup-wrapper {
     scroll-margin-top: 2rem;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-animate {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .scroll-animate.visible {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .mockup-wrapper {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .tag {
+    animation: none !important;
+    opacity: 1 !important;
   }
 }
 
