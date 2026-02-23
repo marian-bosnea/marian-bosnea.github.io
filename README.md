@@ -41,9 +41,10 @@ This site is configured for automatic deployment to GitHub Pages:
 ### Manual Setup Steps
 
 1. Go to your repository Settings → Pages
-2. Set Source to "GitHub Actions"
+2. Set Source to "GitHub Actions" (NOT "Deploy from a branch")
 3. The workflow will automatically deploy on push
 
 ## 📝 License
 
 © 2026 Marian Bosnea. All rights reserved.
+
