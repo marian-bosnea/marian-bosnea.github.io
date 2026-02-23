@@ -1,8 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 function App() {
   const observerRef = useRef(null)
+  const [modalImage, setModalImage] = useState(null)
+  const [allImages, setAllImages] = useState([])
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   useEffect(() => {
     // Create intersection observer for scroll animations
@@ -30,6 +33,24 @@ function App() {
       }
     }
   }, [])
+
+  // Keyboard navigation for modal
+  useEffect(() => {
+    if (!modalImage) return
+
+    const handleKeyPress = (e) => {
+      if (e.key === 'ArrowLeft') {
+        navigatePrev()
+      } else if (e.key === 'ArrowRight') {
+        navigateNext()
+      } else if (e.key === 'Escape') {
+        setModalImage(null)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyPress)
+    return () => window.removeEventListener('keydown', handleKeyPress)
+  }, [modalImage, currentImageIndex, allImages])
 
   const projects = [
     {
@@ -91,6 +112,45 @@ function App() {
     }
   ]
 
+  // Flatten all images from all projects
+  useEffect(() => {
+    const images = []
+    projects.forEach(project => {
+      if (project.platforms) {
+        project.platforms.forEach(platform => {
+          platform.mockups.forEach(mockup => {
+            images.push(mockup)
+          })
+        })
+      } else {
+        project.mockups.forEach(mockup => {
+          images.push(mockup)
+        })
+      }
+    })
+    setAllImages(images)
+  }, [])
+
+  const openModal = (mockup) => {
+    const index = allImages.findIndex(img => img.src === mockup.src)
+    setCurrentImageIndex(index)
+    setModalImage(mockup)
+  }
+
+  const navigateNext = () => {
+    if (allImages.length === 0) return
+    const nextIndex = (currentImageIndex + 1) % allImages.length
+    setCurrentImageIndex(nextIndex)
+    setModalImage(allImages[nextIndex])
+  }
+
+  const navigatePrev = () => {
+    if (allImages.length === 0) return
+    const prevIndex = (currentImageIndex - 1 + allImages.length) % allImages.length
+    setCurrentImageIndex(prevIndex)
+    setModalImage(allImages[prevIndex])
+  }
+
   return (
     <div className="app">
       {/* Hero Section */}
@@ -101,7 +161,7 @@ function App() {
           </div>
           <div className="hero-info">
             <h1 className="hero-title">Marian Bosnea</h1>
-            <p className="hero-subtitle">Mobile App Developer</p>
+            <p className="hero-subtitle">Full Stack Developer</p>
             <div className="hero-description">
               <p>📱 <strong>Frontend:</strong> Expert in Flutter (Dart), Swift, and Kotlin; architected mobile solutions for 500k+ users.</p>
               <p>⚙️ <strong>Backend:</strong> Proficient in .NET/C# and Node.js, with a focus on real-time connectivity via MQTT (Blockbax) and BLE.</p>
@@ -210,6 +270,8 @@ function App() {
                             alt={mockup.alt}
                             className="mockup-image"
                             loading="lazy"
+                            onClick={() => openModal(mockup)}
+                            style={{ cursor: 'pointer' }}
                           />
                         </div>
                       ))}
@@ -232,6 +294,8 @@ function App() {
                         alt={mockup.alt}
                         className="mockup-image"
                         loading="lazy"
+                        onClick={() => openModal(mockup)}
+                        style={{ cursor: 'pointer' }}
                       />
                     </div>
                   ))}
@@ -248,6 +312,27 @@ function App() {
           <p>© 2026 Marian Bosnea. All rights reserved.</p>
         </div>
       </footer>
+
+      {/* Image Modal */}
+      {modalImage && (
+        <div className="image-modal" onClick={() => setModalImage(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setModalImage(null)}>&times;</button>
+            <button className="modal-arrow modal-arrow-left" onClick={navigatePrev}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button className="modal-arrow modal-arrow-right" onClick={navigateNext}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+            <img src={modalImage.src} alt={modalImage.alt} className="modal-image" />
+            <div className="modal-counter">{currentImageIndex + 1} / {allImages.length}</div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
