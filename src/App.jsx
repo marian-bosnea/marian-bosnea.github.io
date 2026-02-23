@@ -122,6 +122,47 @@ function App() {
                 GitHub
               </a>
             </div>
+            <div className="hero-tech-stack">
+              <h3 className="hero-tech-title">Tech Stack</h3>
+              <div className="tech-stack-grid">
+                <div className="tech-chip">
+                  <img src="/tech-stack-icons/Flutter_logo.svg" alt="Flutter" width="24" height="24" />
+                  <span>Flutter</span>
+                </div>
+                <div className="tech-chip">
+                  <img src="/tech-stack-icons/Dart_logo.svg" alt="Dart" width="24" height="24" />
+                  <span>Dart</span>
+                </div>
+                <div className="tech-chip">
+                  <img src="/tech-stack-icons/Swift_logo.svg" alt="Swift" width="24" height="24" />
+                  <span>Swift</span>
+                </div>
+                <div className="tech-chip">
+                  <img src="/tech-stack-icons/Kotlin_logo.svg" alt="Kotlin" width="24" height="24" />
+                  <span>Kotlin</span>
+                </div>
+                <div className="tech-chip">
+                  <img src="/tech-stack-icons/nodejs-icon.svg" alt="Node.js" width="24" height="24" />
+                  <span>Node.js</span>
+                </div>
+                <div className="tech-chip">
+                  <img src="/tech-stack-icons/Microsoft_NET_logo%2009.25.16.svg" alt=".NET" width="24" height="24" />
+                  <span>.NET</span>
+                </div>
+                <div className="tech-chip">
+                  <img src="/tech-stack-icons/C_sharp_logo.svg" alt="C#" width="24" height="24" />
+                  <span>C#</span>
+                </div>
+                <div className="tech-chip">
+                  <img src="/tech-stack-icons/Postgresql_logo.svg" alt="PostgreSQL" width="24" height="24" />
+                  <span>PostgreSQL</span>
+                </div>
+                <div className="tech-chip">
+                  <img src="/tech-stack-icons/Microsoft_Azure_logo.svg" alt="Azure" width="24" height="24" />
+                  <span>Azure</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
