@@ -1,7 +1,7 @@
 /* App Container */
 .app {
   min-height: 100vh;
-  background: #fbfbfd;
+  background: #f5f5f7;
 }
 
 /* Hero Section */
@@ -12,12 +12,16 @@
   justify-content: center;
   padding: 4rem 2rem;
   text-align: center;
-  background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%);
+  background: #f5f5f7;
 }
 
 .hero-content {
   max-width: 980px;
   animation: fadeInUp 1s ease-out;
+  background: white;
+  border-radius: 24px;
+  padding: 3rem 4rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 .avatar-container {
@@ -106,7 +110,7 @@
 }
 
 .project-section.light {
-  background: #ffffff;
+  background: #f5f5f7;
 }
 
 .project-section.dark {
@@ -130,7 +134,7 @@
 }
 
 .project-section.light .project-card {
-  background: #f9f9fb;
+  background: #ffffff;
 }
 
 .project-section.dark .project-card {
@@ -227,6 +231,7 @@
 .mockup-wrapper {
   opacity: 0;
 }
+
 /* When inside a visible grid, animate with stagger */
 .mockups-grid.visible .mockup-wrapper {
   animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
